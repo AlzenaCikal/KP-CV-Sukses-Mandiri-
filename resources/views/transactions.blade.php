@@ -54,6 +54,54 @@
             font-size: 1.1rem;
             margin-top: 8px;
         }
+
+        .table {
+        border-radius: 6px;
+        overflow: hidden;
+        border-collapse: separate;
+        /* ini penting untuk radius bekerja */
+        border-spacing: 0;
+        /* hilangkan jarak antar sel */
+    }
+
+    /* Header sudut kiri atas dan kanan atas */
+    .table thead th:first-child {
+        border-top-left-radius: 6px;
+    }
+
+    .table thead th:last-child {
+        border-top-right-radius: 6px;
+    }
+
+    /* Baris terakhir: sudut kiri bawah dan kanan bawah */
+    .table tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 6px;
+    }
+
+    .table tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 6px;
+    }
+
+
+    .table thead th {
+        background-color: #1e4db7 !important;
+        /* Warna gelap untuk header */
+        color: #ffffff !important;
+        /* Teks putih */
+        border: 1px solid #2c2f45;
+    }
+
+    .table tbody td {
+        background-color: #ffffff;
+        /* Warna body tetap putih */
+        color: #000000;
+
+    }
+
+    .table-bordered {
+
+        border: 1px solid #dee2e6;
+    }
 </style>
 <br>
 <div class="container">
