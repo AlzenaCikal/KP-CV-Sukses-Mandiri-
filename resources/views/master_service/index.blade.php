@@ -1,5 +1,4 @@
 @extends('layout.app')
-
 @section('content')
 <style>
     .badge-pending {
@@ -125,54 +124,42 @@
         border: 1px solid #dee2e6;
     }
 </style>
-
-
-<div class="container mt-4">
-    <h3>Daftar Service Mesin</h3>
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    <a href="{{ route('services.create') }}" class="btn btn-primary mb-3" style="margin-left: 25px;">+ Tambah Service</a>
+<div class="container">
+    <h3>Data Master Service</h3>
+    <a href="{{ route('master-service.create') }}" class="btn btn-primary" style="margin-left: 25PX;">+ Tambah Service</a>
+    <BR></BR>
     <div class="card">
-        <table class="table table-bordered">
-            <thead class="table-dark">
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nama Service</th>
+                <th>Jenis Mesin</th>
+                <th>Estimasi</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($services as $service)
                 <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Layanan</th>
-                    <th>Status</th>
-                    <th>Harga</th>
-                    <th>Estimasi</th>
-                    <th>Tanggal</th>
-                    <th>Aksi</th>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $service->nama_service }}</td>
+                    <td>{{ $service->jenis_mesin }}</td>
+                    <td>{{ $service->estimasi }}</td>
+                    <td>Rp {{ number_format($service->harga, 0, ',', '.') }}</td>
+                    <td>
+                        <a href="{{ route('master-service.edit', $service->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('master-service.destroy', $service->id) }}" method="POST" style="display:inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($services as $index => $service)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $service->nama_customer }}</td>
-                        <td>{{ $service->layanan->nama_service ?? '-' }}</td>
-                        <td>
-                            <span class="badge bg-{{ $service->status == 'completed' ? 'success' : ($service->status == 'in_progress' ? 'warning' : ($service->status == 'cancelled' ? 'danger' : 'primary')) }}">
-                                {{ ucfirst(str_replace('_', ' ', $service->status)) }}
-                            </span>
-                        </td>
-                        <td>Rp {{ number_format($service->layanan->harga ?? 0, 0, ',', '.') }}</td>
-                        <td>{{ $service->layanan->estimasi ?? '-' }}</td>
-                        <td>{{ \Carbon\Carbon::parse($service->tanggal)->format('d-m-Y') }}</td>
-                        <td>
-                            <a href="{{ route('services.edit', $service->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin hapus data?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 </div>
 @endsection

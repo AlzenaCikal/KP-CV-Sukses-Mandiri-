@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SUKSES MANDIRI TEKNIK</title>
-  <link rel="shortcut icon" type="image/png" href="{{ asset('./foto/logos/favicon.png') }}" />
+  <link rel="shortcut icon" type="image/png" href="{{ asset('./foto/logos/logo1.png') }}" />
   <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}" />
   <style>
     .main-content {
@@ -71,7 +71,7 @@
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
-                <i class="ti ti-atom"></i>
+                <i class="ti ti-home"></i>
                 <span class="hide-menu">Dashboard</span>
               </a>
             </li>
@@ -83,7 +83,7 @@
                 href="{{ route('transactions') }}">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
-                    <i class="ti ti-aperture"></i>
+                    <i class="ti ti-shopping-cart"></i>
                   </span>
                   <span class="hide-menu">Transactions</span>
 
@@ -96,7 +96,7 @@
                 href="{{ route('services') }}" aria-expanded="false">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
-                    <i class="ti ti-shopping-cart"></i>
+                    <i class="ti ti-tools"></i>
                   </span>
                   <span class="hide-menu">Services</span>
                 </div>
@@ -107,9 +107,9 @@
               <a class="sidebar-link justify-content-between has-arrow" aria-expanded="false">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
-                    <i class="ti ti-layout-grid"></i>
+                    <i class="ti ti-file-text"></i>
                   </span>
-                  <span class="hide-menu">Front Pages</span>
+                  <span class="hide-menu">Laporan</span>
                 </div>
 
               </a>
@@ -121,7 +121,7 @@
                       <div class="round-16 d-flex align-items-center justify-content-center">
                         <i class="ti ti-circle"></i>
                       </div>
-                      <span class="hide-menu">Homepage</span>
+                      <span class="hide-menu">Laporan Service</span>
                     </div>
 
                   </a>
@@ -133,71 +133,56 @@
                       <div class="round-16 d-flex align-items-center justify-content-center">
                         <i class="ti ti-circle"></i>
                       </div>
-                      <span class="hide-menu">About Us</span>
+                      <span class="hide-menu">Laporan Transaksi</span>
                     </div>
 
                   </a>
                 </li>
+                
+
+                 
+                
+              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link justify-content-between has-arrow" aria-expanded="false">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="d-flex">
+                    <i class="ti ti-file-text"></i>
+                  </span>
+                  <span class="hide-menu">Master Data</span>
+                </div>
+
+              </a>
+              <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
+                  <a class="sidebar-link justify-content-between " href="{{ route('master-barang.index') }}"
                     href="#">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
                         <i class="ti ti-circle"></i>
                       </div>
-                      <span class="hide-menu">Blog</span>
+                      <span class="hide-menu">Master Barang</span>
                     </div>
 
                   </a>
                 </li>
                 <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
+                  <a class="sidebar-link justify-content-between" href="{{ route('master-service.index') }}"
                     href="#">
                     <div class="d-flex align-items-center gap-3">
                       <div class="round-16 d-flex align-items-center justify-content-center">
                         <i class="ti ti-circle"></i>
                       </div>
-                      <span class="hide-menu">Blog Details</span>
+                      <span class="hide-menu">Master Service</span>
                     </div>
 
                   </a>
                 </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
-                    href="#">
-                    <div class="d-flex align-items-center gap-3">
-                      <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
-                      </div>
-                      <span class="hide-menu">Contact Us</span>
-                    </div>
+                
 
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
-                    href="#">
-                    <div class="d-flex align-items-center gap-3">
-                      <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
-                      </div>
-                      <span class="hide-menu">Portfolio</span>
-                    </div>
-
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
-                    href="#">
-                    <div class="d-flex align-items-center gap-3">
-                      <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
-                      </div>
-                      <span class="hide-menu">Pricing</span>
-                    </div>
-
-                  </a>
-                </li>
+                 
+                
               </ul>
             </li>
 

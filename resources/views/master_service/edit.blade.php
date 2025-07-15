@@ -1,5 +1,4 @@
 @extends('layout.app')
-
 @section('content')
 <style>
     .badge-pending {
@@ -125,54 +124,31 @@
         border: 1px solid #dee2e6;
     }
 </style>
-
-
-<div class="container mt-4">
-    <h3>Daftar Service Mesin</h3>
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    <a href="{{ route('services.create') }}" class="btn btn-primary mb-3" style="margin-left: 25px;">+ Tambah Service</a>
+<div class="container">
+    <h3>Edit Service</h3>
     <div class="card">
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Layanan</th>
-                    <th>Status</th>
-                    <th>Harga</th>
-                    <th>Estimasi</th>
-                    <th>Tanggal</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($services as $index => $service)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $service->nama_customer }}</td>
-                        <td>{{ $service->layanan->nama_service ?? '-' }}</td>
-                        <td>
-                            <span class="badge bg-{{ $service->status == 'completed' ? 'success' : ($service->status == 'in_progress' ? 'warning' : ($service->status == 'cancelled' ? 'danger' : 'primary')) }}">
-                                {{ ucfirst(str_replace('_', ' ', $service->status)) }}
-                            </span>
-                        </td>
-                        <td>Rp {{ number_format($service->layanan->harga ?? 0, 0, ',', '.') }}</td>
-                        <td>{{ $service->layanan->estimasi ?? '-' }}</td>
-                        <td>{{ \Carbon\Carbon::parse($service->tanggal)->format('d-m-Y') }}</td>
-                        <td>
-                            <a href="{{ route('services.edit', $service->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin hapus data?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <form action="{{ route('master-service.update', $service->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+            <label>Nama Service</label>
+            <input type="text" name="nama_service" class="form-control" value="{{ $service->nama_service }}" required>
+        </div>
+        <div class="form-group">
+            <label>Jenis Mesin</label>
+            <input type="text" name="jenis_mesin" class="form-control" value="{{ $service->jenis_mesin }}" required>
+        </div>
+        <div class="form-group">
+            <label>Estimasi</label>
+            <input type="text" name="estimasi" class="form-control" value="{{ $service->estimasi }}" required>
+        </div>
+        <div class="form-group">
+            <label>Harga</label>
+            <input type="number" name="harga" class="form-control" value="{{ $service->harga }}" required>
+        </div><br>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('master-service.index') }}" class="btn btn-secondary">Batal</a>
+    </form>
+</div>
 </div>
 @endsection

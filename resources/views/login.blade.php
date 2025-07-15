@@ -30,7 +30,7 @@
 		<div class="form-container sign-in-container">
 			<form action="/login" method="POST">
 				<h1>Sign in</h1>
-				<span>or use your account</span>
+				<span>Silahkan Masukan Username</span>
 				
 					@csrf
 					<input type="email" name="email" placeholder="Email" required />
@@ -38,7 +38,7 @@
 					<button type="submit">Sign In</button>
 				
 
-				<a href="#">Forgot your password?</a>
+				<!-- <a href="#">Forgot your password?</a> -->
 			</form>
 		</div>
 		<div class="overlay-container">

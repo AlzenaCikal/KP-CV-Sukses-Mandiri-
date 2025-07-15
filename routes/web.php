@@ -6,7 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\LaporanController;
-
+use App\Http\Controllers\MasterBarangController;
+use App\Http\Controllers\MasterServiceController;
 // Halaman Publik
 Route::get('/', function () {
     return view('login');
@@ -48,3 +49,14 @@ Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::get('/laporan/export-excel', [LaporanController::class, 'exportExcel'])->name('laporan.export.excel');
 Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('laporan.export.pdf');
 
+// Master Barang
+Route::resource('master-barang', MasterBarangController::class);
+Route::get('/barang/{id}/harga', function ($id) {
+    $barang = App\Models\MasterBarang::findOrFail($id);
+    return response()->json(['harga' => $barang->harga]);
+});
+
+
+
+// Master Service
+Route::resource('master-service', MasterServiceController::class);

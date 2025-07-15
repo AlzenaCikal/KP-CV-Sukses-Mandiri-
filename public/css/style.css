@@ -22,7 +22,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../foto/2.jpg'); /* sesuaikan path */
+    /* background-image: url('../foto/2.jpg'); sesuaikan path */
     background-size: cover;
     background-position: center;
     filter: brightness(0.6); /* agar form lebih menonjol */
@@ -59,8 +59,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #263bf8;
+	background-color: #263bf8;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -175,7 +175,7 @@ input {
 .overlay {
 	background: #87CEFA;
 	background: -webkit-linear-gradient(to right, #87CEFA, #87CEFA);
-	background: linear-gradient(to right,  #FF4B2B, #87CEFA, #87CEFA,#FF4B2B);
+	background: linear-gradient(to right,  #edd5d1, #87CEFA, #87CEFA,#fbf9f9);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;

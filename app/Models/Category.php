@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +10,8 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function category()
-{
-    return $this->belongsTo(Category::class);
+    protected $table = 'categories'; // pastikan sesuai nama tabel di DB
+
+    // protected $fillable = ['name']; // jika ada
 }
 
-}
