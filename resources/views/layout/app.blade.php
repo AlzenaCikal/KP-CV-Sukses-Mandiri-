@@ -121,26 +121,12 @@
                       <div class="round-16 d-flex align-items-center justify-content-center">
                         <i class="ti ti-circle"></i>
                       </div>
-                      <span class="hide-menu">Laporan Service</span>
-                    </div>
-
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a class="sidebar-link justify-content-between"
-                    href="#">
-                    <div class="d-flex align-items-center gap-3">
-                      <div class="round-16 d-flex align-items-center justify-content-center">
-                        <i class="ti ti-circle"></i>
-                      </div>
-                      <span class="hide-menu">Laporan Transaksi</span>
+                      <span class="hide-menu"> Service & Transaction </span>
                     </div>
 
                   </a>
                 </li>
                 
-
-                 
                 
               </ul>
             </li>

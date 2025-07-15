@@ -48,6 +48,13 @@ Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->nam
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::get('/laporan/export-excel', [LaporanController::class, 'exportExcel'])->name('laporan.export.excel');
 Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('laporan.export.pdf');
+Route::get('/laporan/perbulan', [TransactionController::class, 'laporanPerBulan'])->name('laporan.perbulan');
+Route::get('/laporan/perminggu', [TransactionController::class, 'laporanPerMinggu'])->name('laporan.perminggu');
+Route::get('/laporan-service/perbulan', [ServiceController::class, 'laporanServiceBulanan'])->name('laporan.service.perbulan');
+Route::get('/laporan-service/perminggu', [ServiceController::class, 'laporanServiceMingguan'])->name('laporan.service.perminggu');
+// Route::get('/laporan', [TransactionController::class, 'showLaporanView'])->name('laporan');
+Route::get('/laporan', [\App\Http\Controllers\TransactionController::class, 'showLaporanView'])->name('laporan');
+
 
 // Master Barang
 Route::resource('master-barang', MasterBarangController::class);
@@ -58,5 +65,11 @@ Route::get('/barang/{id}/harga', function ($id) {
 
 
 
+
+
 // Master Service
 Route::resource('master-service', MasterServiceController::class);
+Route::get('/services/invoice/{id}', [ServiceController::class, 'invoice'])->name('services.invoice');
+// routes/web.php
+Route::get('/service/invoice/{id}', [ServiceController::class, 'invoice'])->name('services.invoice');
+Route::get('/transactions/{id}/export-pdf', [TransactionController::class, 'exportPDF'])->name('transactions.invoice');

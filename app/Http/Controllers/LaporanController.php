@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\Transaction;
 // use App\Exports\ServiceExport;
 // use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -65,5 +67,10 @@ class LaporanController extends Controller
         ]);
 
         return $pdf->download('laporan-service.pdf');
+    }
+    public function showLaporanView()
+    {
+        $transactions = Transaction::with('barang')->latest()->get(); // atau pakai filter lainnya
+        return view('laporan', compact('transactions'));
     }
 }

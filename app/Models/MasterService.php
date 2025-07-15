@@ -19,6 +19,8 @@ class MasterService extends Model
         'harga',
     ];
 
+
+
     // app/Models/ServiceTransaction.php
     // app/Models/MasterService.php
     public function transactions()

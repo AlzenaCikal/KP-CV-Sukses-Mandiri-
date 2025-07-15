@@ -163,6 +163,7 @@
                         <td>{{ \Carbon\Carbon::parse($service->tanggal)->format('d-m-Y') }}</td>
                         <td>
                             <a href="{{ route('services.edit', $service->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                              <a href="{{ route('services.invoice', $service->id) }}" class="btn btn-sm btn-success" target="_blank">Invoice</a>
                             <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin hapus data?')">
                                 @csrf
                                 @method('DELETE')

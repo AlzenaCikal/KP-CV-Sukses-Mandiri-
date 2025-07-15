@@ -6,9 +6,11 @@ use App\Models\Transaction;
 use App\Models\MasterBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
-{   
+{
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -17,9 +19,9 @@ class TransactionController extends Controller
             ->when($search, function ($query, $search) {
                 $query->whereHas('barang', function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                      ->orWhereHas('category', function ($qc) use ($search) {
-                          $qc->where('name', 'like', "%{$search}%");
-                      });
+                        ->orWhereHas('category', function ($qc) use ($search) {
+                            $qc->where('name', 'like', "%{$search}%");
+                        });
                 });
             })
             ->latest()
@@ -113,5 +115,67 @@ class TransactionController extends Controller
             'masuk' => $barangMasuk,
             'keluar' => $barangKeluar,
         ]);
+    }
+
+    // pastikan sudah di-import
+
+    public function exportPDF($id)
+    {
+        $transaksi = Transaction::with(['barang.category'])->findOrFail($id);
+
+        $pdf = PDF::loadView('invoice.transactions_invoice', compact('transaksi'));
+
+
+        return $pdf->download('invoice_transaksi_' . $transaksi->id . '.pdf');
+    }
+
+
+    // --- LAPORAN PER BULAN ---
+    public function laporanPerBulan()
+    {
+        $bulanIni = Carbon::now()->format('Y-m');
+        $data = Transaction::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->with('barang')
+            ->get();
+
+        $totalPendapatan = $data->sum('total_harga');
+
+        $pdf = PDF::loadView('laporan.laporan_pdf', [
+            'data' => $data,
+            'periode' => 'Bulan ' . Carbon::now()->translatedFormat('F Y'),
+            'total' => $totalPendapatan
+        ]);
+
+        return $pdf->download('laporan_bulanan.pdf');
+    }
+
+    // --- LAPORAN PER MINGGU ---
+    public function laporanPerMinggu()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+
+        $data = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->with('barang')
+            ->get();
+
+        $totalPendapatan = $data->sum('total_harga');
+
+        $pdf = PDF::loadView('laporan.laporan_pdf', [
+            'data' => $data,
+            'periode' => 'Minggu ' . $startOfWeek->format('d M') . ' - ' . $endOfWeek->format('d M Y'),
+            'total' => $totalPendapatan
+        ]);
+
+        return $pdf->download('laporan_mingguan.pdf');
+    }
+
+    public function showLaporanView()
+    {
+        $transactions = \App\Models\Transaction::with('barang')->latest()->get();
+        $services = \App\Models\Service::with('layanan')->latest()->get();
+
+        return view('laporan', compact('transactions', 'services'));
     }
 }

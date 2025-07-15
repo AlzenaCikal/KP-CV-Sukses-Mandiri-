@@ -55,9 +55,9 @@
     <h2 class="mb-3">Daftar Transaksi Barang</h2>
 
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @endif
 
     <a href="{{ route('transactions.create') }}" class="btn btn-primary mb-3" style="margin-left: 25px;">+ Tambah Transaksi</a>
@@ -85,31 +85,32 @@
             </thead>
             <tbody>
                 @forelse($transactions as $index => $transaction)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $transaction->barang->nama_barang ?? '-' }}</td>
-                        <td>{{ $transaction->barang->kategori ?? 'Tidak Ada Kategori' }}</td>
-                        <td>
-                            <span class="badge bg-{{ $transaction->type == 'masuk' ? 'success' : 'danger' }}">
-                                {{ ucfirst($transaction->type) }}
-                            </span>
-                        </td>
-                        <td>{{ $transaction->quantity }}</td>
-                        <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('d-m-Y') }}</td>
-                        <td>{{ number_format($transaction->total_harga, 0, ',', '.') }}</td>
-                        <td>
-                            <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus transaksi ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $transaction->barang->nama_barang ?? '-' }}</td>
+                    <td>{{ $transaction->barang->kategori ?? 'Tidak Ada Kategori' }}</td>
+                    <td>
+                        <span class="badge bg-{{ $transaction->type == 'masuk' ? 'success' : 'danger' }}">
+                            {{ ucfirst($transaction->type) }}
+                        </span>
+                    </td>
+                    <td>{{ $transaction->quantity }}</td>
+                    <td>{{ \Carbon\Carbon::parse($transaction->created_at)->format('d-m-Y') }}</td>
+                    <td>{{ number_format($transaction->total_harga, 0, ',', '.') }}</td>
+                    <td>
+                        <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('transactions.invoice', $transaction->id) }}" target="_blank" class="btn btn-sm btn-success"> Download PDF </a>
+                        <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus transaksi ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
                 @empty
-                    <tr>
-                        <td colspan="8" class="text-center">Belum ada transaksi</td>
-                    </tr>
+                <tr>
+                    <td colspan="8" class="text-center">Belum ada transaksi</td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
